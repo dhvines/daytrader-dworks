@@ -27,20 +27,35 @@ import static org.junit.Assert.assertTrue;
 public class RestIT {
 
     @Test
-    public void testDeployment() {
-        testEndpoint("/rest/index.jsp", "<h1>Hello World!</h1>");
+    public void testGetAddresses() {
+    	String expectedOutput = null;
+        testEndpoint("/rest/addresses", expectedOutput);
+    }
+      
+    @Test
+    public void testGetAddress() {
+    	String expectedOutput = null;
+    	testEndpoint("/rest/addresses/Entry4", expectedOutput);
+    }
+
+    @Test
+    public void testSearch() {
+    	String expectedOutput = null;
+    	testEndpoint("/rest/addresses/search/Entry4", expectedOutput);
     }
     
     private void testEndpoint(String endpoint, String expectedOutput) {
-        String route = System.getProperty("daytrader.app.route");
-
+        String route = System.getProperty("rest.app.route");
+    
         Response response = sendRequest(route + endpoint, "GET");
         int responseCode = response.getStatus();
         assertTrue("Incorrect response code: " + responseCode,responseCode == 200);
         
         String responseString = response.readEntity(String.class);
+        if (expectedOutput != null) {
+        	assertTrue("Incorrect response, response is " + responseString, responseString.contains(expectedOutput));
+        }
         response.close();
-        assertTrue("Incorrect response, response is " + responseString, responseString.contains(expectedOutput));
     }
 
     private Response sendRequest(String url, String requestType) {

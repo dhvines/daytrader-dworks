@@ -21,21 +21,50 @@
         <servlet-name>javax.ws.rs.core.Application</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
+    
+    <!--  DHV ADDED FOR STEP 2 -->
+  <resource-ref>
+        <res-ref-name>jdbc/TradeDataSource</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+    </resource-ref>
+    <resource-ref>
+        <res-ref-name>jms/QueueConnectionFactory</res-ref-name>
+        <res-type>javax.jms.QueueConnectionFactory</res-type>
+        <res-auth>Application</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+    </resource-ref>
+    <resource-ref>
+        <res-ref-name>jms/TopicConnectionFactory</res-ref-name>
+        <res-type>javax.jms.TopicConnectionFactory</res-type>
+        <res-auth>Application</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+    </resource-ref>    
+    
+     <ejb-local-ref>
+        <ejb-ref-name>web/ejb/local/TradeSLSBBean</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>        
+        <local>com.ibm.websphere.samples.daytrader.ejb3.TradeSLSBLocal</local>
+    </ejb-local-ref>
+    
+    <ejb-local-ref>
+        <ejb-ref-name>web/ejb/local/DirectSLSBBean</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>com.ibm.websphere.samples.daytrader.ejb3.DirectSLSBLocal</local>
+    </ejb-local-ref>
+
+    <message-destination-ref>
+        <message-destination-ref-name>jms/TradeBrokerQueue</message-destination-ref-name>
+        <message-destination-type>javax.jms.Queue</message-destination-type>
+        <message-destination-usage>Produces</message-destination-usage>
+        <message-destination-link>dt-ejb.jar#TradeBrokerQueue</message-destination-link>
+    </message-destination-ref>
+    <message-destination-ref>
+        <message-destination-ref-name>jms/TradeStreamerTopic</message-destination-ref-name>
+        <message-destination-type>javax.jms.Topic</message-destination-type>
+        <message-destination-usage>Produces</message-destination-usage>
+        <message-destination-link>dt-ejb.jar#TradeStreamerTopic</message-destination-link>
+    </message-destination-ref>
+
 </web-app>
-
-<!-- <web-app id="addressbook-server" version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
-        <servlet>
-            <servlet-name>AddressBook</servlet-name>
-            <servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
-            <init-param>
-                <param-name>javax.ws.rs.Application</param-name>
-                <param-value>com.ibm.websphere.samples.daytrader.rest.AddressApplication</param-value>
-            </init-param>
-            <load-on-startup>1</load-on-startup>
-        </servlet>
-
-        <servlet-mapping>
-            <servlet-name>AddressBook</servlet-name>
-            <url-pattern>/*</url-pattern>
-        </servlet-mapping>
-</web-app> -->

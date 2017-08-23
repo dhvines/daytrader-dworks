@@ -28,7 +28,8 @@ import javax.ejb.EJB;
 
 import com.ibm.websphere.samples.daytrader.HoldingDataBean;
 import com.ibm.websphere.samples.daytrader.TradeConfig;
-import com.ibm.websphere.samples.daytrader.ejb3.TradeSLSBLocal;
+// DHV
+//import com.ibm.websphere.samples.daytrader.ejb3.TradeSLSBLocal;
 import com.ibm.websphere.samples.daytrader.util.Log;
 
 /**
@@ -50,8 +51,9 @@ public class PingServlet2Session2EntityCollection extends HttpServlet {
 
     private static int hitCount;
 
-    @EJB
-    private TradeSLSBLocal tradeSLSBLocal;
+// DHV
+//    @EJB
+//    private TradeSLSBLocal tradeSLSBLocal;
 
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         doGet(req, res);
@@ -77,7 +79,8 @@ public class PingServlet2Session2EntityCollection extends HttpServlet {
                     // getQuote will call findQuote which will instaniate the
                     // Quote Entity Bean
                     // and then will return a QuoteObject
-                    holdingDataBeans = tradeSLSBLocal.getHoldings(userID);
+// DHV
+//                    holdingDataBeans = tradeSLSBLocal.getHoldings(userID);
                     // trade.remove();
                 }
             } catch (Exception ne) {

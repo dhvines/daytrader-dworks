@@ -23,6 +23,22 @@
 </HEAD>
 
 <BODY bgcolor="#FFFFFF" link="#000099" vlink="#000099">
+
+<input type="text" id="daytraderAppRoute" />
+<script>
+$(function(){
+$.ajax({
+    url:'config.json',
+    type:'GET',
+    success:function(data){
+        var configData = JSON.parse(data);
+        $("#daytraderAppRoute").val(configData.daytrader_app_route);
+    }
+});
+});
+</script>
+
+
 <HR>
 <TABLE width="740">
 	<TBODY>

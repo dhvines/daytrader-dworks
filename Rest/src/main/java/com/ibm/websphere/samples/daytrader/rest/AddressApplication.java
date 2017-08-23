@@ -29,6 +29,10 @@ public class AddressApplication extends Application {
     public Set<Class<?>> getClasses() {
         Set<Class<?>> set = new HashSet<Class<?>>();
         set.add(AddressBook.class);
+        set.add(Traders.class);
+        set.add(Markets.class);
+        set.add(Quotes.class);
+//        set.add(Accounts.class);
         return set;
     }
 

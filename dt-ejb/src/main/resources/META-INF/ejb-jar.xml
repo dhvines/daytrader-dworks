@@ -19,6 +19,7 @@
     xmlns="http://java.sun.com/xml/ns/javaee"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/ejb-jar_3_1.xsd"> 
     <display-name>DayTrader Enterprise Bean Definitions</display-name>
+    <ejb-client-jar>dt-ejbClient.jar</ejb-client-jar>
 
     <!-- 
         All EJB 3.1 properties and attributes have been applied to the various DayTrader 

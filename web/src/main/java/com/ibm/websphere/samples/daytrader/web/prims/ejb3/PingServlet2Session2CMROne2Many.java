@@ -30,7 +30,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ibm.websphere.samples.daytrader.OrderDataBean;
 import com.ibm.websphere.samples.daytrader.TradeConfig;
-import com.ibm.websphere.samples.daytrader.ejb3.TradeSLSBLocal;
+// DHV
+//import com.ibm.websphere.samples.daytrader.ejb3.TradeSLSBLocal;
 import com.ibm.websphere.samples.daytrader.util.Log;
 
 /**
@@ -47,8 +48,9 @@ public class PingServlet2Session2CMROne2Many extends HttpServlet {
 
     private static int hitCount;
 
-    @EJB
-    private TradeSLSBLocal tradeSLSBLocal;
+// DHV
+//    @EJB
+//    private TradeSLSBLocal tradeSLSBLocal;
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -74,8 +76,9 @@ public class PingServlet2Session2CMROne2Many extends HttpServlet {
             for (int ii = 0; ii < iter; ii++) {
                 userID = TradeConfig.rndUserID();
 
-                // get the users orders and print the output.
-                orderDataBeans = tradeSLSBLocal.getOrders(userID);
+// DHV
+//                // get the users orders and print the output.
+//                orderDataBeans = tradeSLSBLocal.getOrders(userID);
             }
 
             output.append("<HR>initTime: " + initTime + "<BR>Hit Count: ").append(hitCount++);

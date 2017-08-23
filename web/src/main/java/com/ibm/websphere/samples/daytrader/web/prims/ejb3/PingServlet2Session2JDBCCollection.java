@@ -27,7 +27,8 @@ import javax.ejb.EJB;
 
 import com.ibm.websphere.samples.daytrader.HoldingDataBean;
 import com.ibm.websphere.samples.daytrader.TradeConfig;
-import com.ibm.websphere.samples.daytrader.ejb3.DirectSLSBLocal;
+// DHV
+//import com.ibm.websphere.samples.daytrader.ejb3.DirectSLSBLocal;
 import com.ibm.websphere.samples.daytrader.util.Log;
 
 /**
@@ -47,8 +48,9 @@ public class PingServlet2Session2JDBCCollection extends HttpServlet {
 
     private static int hitCount;
 
-    @EJB
-    private DirectSLSBLocal directSLSBLocal;
+// DHV
+//@EJB
+//    private DirectSLSBLocal directSLSBLocal;
 
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         doGet(req, res);
@@ -75,7 +77,8 @@ public class PingServlet2Session2JDBCCollection extends HttpServlet {
                     // getQuote will call findQuote which will instaniate the
                     // Quote Entity Bean
                     // and then will return a QuoteObject
-                    holdingDataBeans = directSLSBLocal.getHoldings(userID);
+// DHV
+//                    holdingDataBeans = directSLSBLocal.getHoldings(userID);
                 }
             } catch (Exception ne) {
                 Log.error(ne, "PingServlet2Session2JDBCCollection.goGet(...): exception getting HoldingData collection through Trade for user " + userID);

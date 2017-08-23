@@ -28,7 +28,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.ibm.websphere.samples.daytrader.RunStatsDataBean;
 import com.ibm.websphere.samples.daytrader.TradeAction;
 import com.ibm.websphere.samples.daytrader.TradeConfig;
-import com.ibm.websphere.samples.daytrader.direct.TradeDirect;
+// DHV
+// import com.ibm.websphere.samples.daytrader.direct.TradeDirect;
 import com.ibm.websphere.samples.daytrader.util.Log;
 
 /**
@@ -353,12 +354,14 @@ public class TradeConfigServlet extends HttpServlet {
                 resp.setContentType("text/html");
 
                 //Find out the Database being used
-                TradeDirect tradeDirect = new TradeDirect();
+// DHV
+//              TradeDirect tradeDirect = new TradeDirect();
 
-                String dbProductName = null;
+                String dbProductName = null; 
                 try
                 {
-                    dbProductName = tradeDirect.checkDBProductName();
+// DHV
+//                	dbProductName = tradeDirect.checkDBProductName();
                 } catch (Exception e)
                 {
                     Log.error(e, "TradeBuildDB: Unable to check DB Product name");

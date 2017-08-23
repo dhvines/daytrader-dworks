@@ -19,15 +19,6 @@
 
 package com.ibm.websphere.samples.daytrader.rest;
 
-import java.util.List;
-
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -56,19 +47,6 @@ public class Address {
         this.city = city;
         this.state = state;
         this.country = country;
-    }
-
-    @GET
-    @Consumes(value = { "text/xml", "application/x-www-form-urlencoded" })
-    @Produces(value = { "text/xml" })
-    public Response get(@Context HttpHeaders headers) {
-        List<MediaType> acceptTypes = headers.getAcceptableMediaTypes();
-        Response r = null;
-        if (acceptTypes.contains(MediaType.TEXT_XML)) {
-            r = Response.ok(this).build();
-        }
-
-        return r;
     }
 
     public String getEntryName() {

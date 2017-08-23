@@ -25,7 +25,8 @@ import javax.ejb.EJB;
 
 import com.ibm.websphere.samples.daytrader.QuoteDataBean;
 import com.ibm.websphere.samples.daytrader.TradeConfig;
-import com.ibm.websphere.samples.daytrader.ejb3.TradeSLSBLocal;
+// DHV
+//import com.ibm.websphere.samples.daytrader.ejb3.TradeSLSBLocal;
 import com.ibm.websphere.samples.daytrader.util.Log;
 
 /**
@@ -45,8 +46,9 @@ public class PingServlet2TwoPhase extends HttpServlet {
 
     private static int hitCount;
 
-    @EJB
-    private TradeSLSBLocal tradeSLSBLocal;
+// DHV
+//    @EJB
+//    private TradeSLSBLocal tradeSLSBLocal;
 
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         doGet(req, res);
@@ -72,7 +74,8 @@ public class PingServlet2TwoPhase extends HttpServlet {
                     // getQuote will call findQuote which will instaniate the
                     // Quote Entity Bean
                     // and then will return a QuoteObject
-                    quoteData = tradeSLSBLocal.pingTwoPhase(symbol);
+// DHV
+//                    quoteData = tradeSLSBLocal.pingTwoPhase(symbol);
 
                 }
             } catch (Exception ne) {

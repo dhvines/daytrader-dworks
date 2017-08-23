@@ -13,13 +13,9 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
+<!-- how to copy the war dependency into the target folder -->
+
   	<dependencies>
-		<dependency>
-			<groupId>com.ibm.websphere.samples.daytrader</groupId>
-			<artifactId>Rest</artifactId>
-			<version>1.0-SNAPSHOT</version>
-			<type>war</type>
-		</dependency>
 		<dependency>
 			<groupId>com.ibm.websphere.samples.daytrader</groupId>
 			<artifactId>dt-ejb</artifactId>
@@ -31,9 +27,16 @@
 			<artifactId>web</artifactId>
 			<version>1.0-SNAPSHOT</version>
 			<type>war</type>
+		</dependency>			        
+
+		<dependency>
+			<groupId>com.ibm.websphere.samples.daytrader</groupId>
+			<artifactId>Rest</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<type>war</type>
+			<scope>test</scope>
 		</dependency>	
-		        
-	
+			
 	</dependencies>
 	
 	 <build>
@@ -55,19 +58,32 @@
 					<webModule>
 						<groupId>com.ibm.websphere.samples.daytrader</groupId>
 						<artifactId>web</artifactId>
+						<contextRoot>/daytrader</contextRoot>
+						<uri>web.war</uri>
 						<bundleFileName>web.war</bundleFileName>
 					</webModule>
-					<webModule>
-						<groupId>com.ibm.websphere.samples.daytrader</groupId>
-						<artifactId>Rest</artifactId>
-					    <bundleFileName>Rest.war</bundleFileName>
-					</webModule>
 				</modules>
-	        </configuration>
+    		</configuration>
       	</plugin>
     
-      	</plugins>
-      	</build>
+      <plugin>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>3.0.1</version>
+        <executions>
+          <execution>
+            <id>copy-dependencies</id>
+            <phase>prepare-package</phase>
+            <goals> <goal>copy-dependencies</goal> </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/dependency</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    
+     </plugins>
+  </build>
   
   	<profiles>
 		<profile>
@@ -76,6 +92,8 @@
   <properties>
    	<wlpServerName>Daytrader3Sample</wlpServerName>
 	<daytraderAppRoute>http://localhost:9080</daytraderAppRoute>
+	<restAppRoute>http://localhost:9080</restAppRoute>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
   
     	<dependencies>
@@ -86,13 +104,13 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.glassfish.jersey.core</groupId>
-			<artifactId>jersey-client</artifactId>
-			<version>2.22.2</version>
-			<scope>test</scope>
-		</dependency>
-		
+
+         <dependency>
+                <groupId>org.glassfish.jersey.core</groupId>
+                <artifactId>jersey-client</artifactId>
+                <version>2.22.2</version>
+                			<scope>test</scope>
+                			</dependency>
 	</dependencies>
 
   <build>
@@ -138,7 +156,7 @@
     </execution>
       <!-- docker and standalone -->
     <execution>
-      <id>copy-app</id>
+      <id>copy-daytrader</id>
       <phase>package</phase>
       <goals> <goal>copy-resources</goal> </goals>
       <configuration>
@@ -149,7 +167,25 @@
           <resource>
             <directory>${project.build.directory}</directory>
             <includes>
-              <include>${project.artifactId}-${project.version}.ear</include>
+              <include>${project.artifactId}-${project.version}.${packaging}</include>
+            </includes>
+          </resource>
+        </resources>
+      </configuration>
+    </execution>
+    <execution>
+      <id>copy-rest</id>
+      <phase>package</phase>
+      <goals> <goal>copy-resources</goal> </goals>
+      <configuration>
+        <outputDirectory>
+          ${project.build.directory}/wlp/usr/servers/${wlpServerName}/dropins
+        </outputDirectory>
+        <resources>
+          <resource>
+            <directory>${project.build.directory}/dependency</directory>
+            <includes>
+              <include>Rest-${project.version}.war</include>
             </includes>
           </resource>
         </resources>
@@ -169,6 +205,7 @@
       <configuration>
         <systemPropertyVariables>					
           <daytrader.app.route>${daytraderAppRoute}</daytrader.app.route>
+          <rest.app.route>${restAppRoute}</rest.app.route>
         </systemPropertyVariables>
         <testSourceDirectory>src/test/java</testSourceDirectory>
       </configuration>
@@ -216,7 +253,7 @@
           <feature>jsf-2.0</feature>
           <feature>localconnector-1.0</feature>
           <feature>wasjmsserver-1.0</feature>
-          <feature>jaxrs-1.1</feature>
+          <feature>jaxrs-2.0</feature>
           <feature>ejblite-3.1</feature>
           <feature>jpa-2.0</feature>
           <feature>jmsmdb-3.1</feature>
@@ -250,7 +287,9 @@
         		
         		  <properties>
         		     	<wlpServerName>Daytrader3Sample</wlpServerName>
+       		     		<restAppRoute>http://192.168.254.9:9080</restAppRoute>
 						<daytraderAppRoute>http://192.168.254.9:9080</daytraderAppRoute>
+					    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
 			
 			  	<dependencies>
@@ -390,6 +429,7 @@
       <goals> <goal>integration-test</goal> </goals>
       <configuration>
         <systemPropertyVariables>					
+          <rest.app.route>${restAppRoute}</rest.app.route>
           <daytrader.app.route>${daytraderAppRoute}</daytrader.app.route>
         </systemPropertyVariables>
         <testSourceDirectory>src/test/java</testSourceDirectory>

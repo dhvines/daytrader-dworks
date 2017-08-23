@@ -28,7 +28,8 @@ import javax.ejb.EJB;
 
 
 import com.ibm.websphere.samples.daytrader.TradeConfig;
-import com.ibm.websphere.samples.daytrader.ejb3.TradeSLSBLocal;
+// DHV
+//import com.ibm.websphere.samples.daytrader.ejb3.TradeSLSBLocal;
 import com.ibm.websphere.samples.daytrader.util.Log;
 
 /**
@@ -50,8 +51,9 @@ public class PingServlet2Session extends HttpServlet {
 
     private static int hitCount;
 
-    @EJB
-    private TradeSLSBLocal tradeSLSBLocal;
+// DHV    
+//    @EJB
+//    private TradeSLSBLocal tradeSLSBLocal;
 
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         doGet(req, res);
@@ -77,7 +79,8 @@ public class PingServlet2Session extends HttpServlet {
                 double increase = 0.0;
                 int iter = TradeConfig.getPrimIterations();
                 for (int ii = 0; ii < iter; ii++) {
-                    increase = tradeSLSBLocal.investmentReturn(rnd1, rnd2);
+// DHV
+//                	increase = tradeSLSBLocal.investmentReturn(rnd1, rnd2);
                 }
 
                 // write out the output
@@ -110,16 +113,17 @@ public class PingServlet2Session extends HttpServlet {
         hitCount = 0;
         initTime = new java.util.Date().toString();
 
-        if (tradeSLSBLocal == null) {
-            Log.error("PingServlet2Session:init - Injection of tradeSLSBLocal failed - performing JNDI lookup!");
-            
-            try {
-                InitialContext context = new InitialContext();
-                tradeSLSBLocal = (TradeSLSBLocal) context.lookup("java:comp/env/web/ejb/TradeSLSBBean");                
-            } catch (Exception ex) {
-                Log.error("PingServlet2Session:init - Lookup of tradeSLSBLocal failed!!!");
-                ex.printStackTrace();
-            }
-        }
+// DHV
+//        if (tradeSLSBLocal == null) {
+//            Log.error("PingServlet2Session:init - Injection of tradeSLSBLocal failed - performing JNDI lookup!");
+//            
+//            try {
+//                InitialContext context = new InitialContext();
+//                tradeSLSBLocal = (TradeSLSBLocal) context.lookup("java:comp/env/web/ejb/TradeSLSBBean");                
+//            } catch (Exception ex) {
+//                Log.error("PingServlet2Session:init - Lookup of tradeSLSBLocal failed!!!");
+//                ex.printStackTrace();
+//            }
+//        }
     }
 }

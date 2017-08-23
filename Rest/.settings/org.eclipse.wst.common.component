@@ -5,6 +5,13 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/.apt_generated"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="dt-ejb-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/dt-ejb/dt-ejb">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="dt-ejb-client-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/dt-ejb-client/dt-ejb-client">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="Rest"/>
         <property name="java-output-path" value="/Rest/target/classes"/>
     </wb-module>

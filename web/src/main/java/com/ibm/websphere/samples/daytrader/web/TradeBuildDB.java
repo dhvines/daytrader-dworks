@@ -24,7 +24,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import com.ibm.websphere.samples.daytrader.*;
-import com.ibm.websphere.samples.daytrader.direct.TradeDirect;
+// DHV
+// import com.ibm.websphere.samples.daytrader.direct.TradeDirect;
 import com.ibm.websphere.samples.daytrader.util.*;
 
 
@@ -64,7 +65,8 @@ public class TradeBuildDB {
 		{	
 			//out.println("<BR>TradeBuildDB: **** warPath= "+warPath+" ****</BR></BODY>");
 			
-			TradeDirect tradeDirect = new TradeDirect();
+// DHV
+//          TradeDirect tradeDirect = new TradeDirect();
 			boolean success = false;
 			
 			Object[] sqlBuffer = null;
@@ -90,7 +92,8 @@ public class TradeBuildDB {
 			out.println("<BR>TradeBuildDB: **** Dropping and Recreating the DayTrader tables... ****</BR>");
 			try
 			{
-				success = tradeDirect.recreateDBTables(sqlBuffer, out);
+// DHV
+//				success = tradeDirect.recreateDBTables(sqlBuffer, out);
 			}
 			catch (Exception e)
 			{

@@ -27,7 +27,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
-@Path(value = "/addresses")
+@Path(value = "/")
 public class AddressBook {
 
     static {
@@ -49,14 +49,12 @@ public class AddressBook {
 
     }
 
-    public AddressBook() {
-
-    }
-
+    public AddressBook() {}
+   
     @GET
-    @Path(value = "/search/{searchstring}")
+    @Path(value = "addresses/search/{searchString}")
     @Produces(value = { "application/json" })
-    public AddressList search(@PathParam(value = "searchstring") String searchString) {
+    public AddressList search( @PathParam("searchString") String searchString) {
         AddressList addressList = new AddressList();
         List<Address> addresses = addressList.getAddresses();
         Iterator<Address> addressIter = AddressBookDatabase.getAddresses();
@@ -68,8 +66,9 @@ public class AddressBook {
         }
         return addressList;
     }
-
+    
     @GET
+    @Path(value = "addresses")
     @Produces(value = { "application/json" })
     public AddressList getAddresses() {
         AddressList addressList = new AddressList();
@@ -82,11 +81,12 @@ public class AddressBook {
         return addressList;
     }
 
-    @Path("/{entryName}")
-    public Address getAddress(@PathParam(value = "entryName") String entryName) {
-        Address addr = AddressBookDatabase.getAddress(entryName);
-        return addr;
-    }
-
+  @GET
+  @Path(value = "addresses/{entryName}")
+  @Produces(value = { "application/json" })
+  public Address getAddress( @PathParam("entryName") String entryName) {
+      Address addr = AddressBookDatabase.getAddress(entryName);
+      return addr;
+  }
 
 }
